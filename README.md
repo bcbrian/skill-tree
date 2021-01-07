@@ -1,46 +1,72 @@
-# Getting Started with Create React App
+# Rune Mastery Loadout Talent Calculator 9000
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##### It's over 9000
 
-## Available Scripts
+## Data structures
 
-In the project directory, you can run:
+> Hopefully this can someday be stored in a db. For now it will live on the front end.
 
-### `yarn start`
+```ts
+type Skill {
+  // id of the skill
+  id: string; //unique
+  // name of the skill
+  name: string; //unique?
+  // names of other skills that need to be purchased first
+  prerequisites: string[];
+  // the parent classifications that this skill belongs to
+  classifications: string[];
+  // description of the skill
+  description: string;
+  // how this skill effects attributes
+  effects: Attribute[]; // name ... attributes maybe?
+  // sprite card position
+  activeSprite: Sprite;
+  // deactive sprite
+  deactiveSprite: Sprite;
+}
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+type Classification {
+  // name of the classification
+  name: string;
+  // sort order for view... alphanewmeric? then not needed
+  sortOrder: number;
+  // base attributes for the classification
+  baseAttributes: Attribute[];
+}
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+type Attribute {
+  // name of the attribute
+  name: string;
+  // sort order for view... alphanewmeric? then not needed
+  sortOrder: number;
+  // values are summed up to get total attribute value
+  value: number;
+}
 
-### `yarn test`
+type User {
+  // name of the user
+  name: string; // only matter with auth?
+  // skills
+  skills: Skills[];
+  // skill points for purchasing points
+  skillPoints: number;
+  // attributes
+  attributes: Attribute[];
+  // classification of the user
+  classification: Classification;
+}
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+type Sprite {
+  // file location
+  file: string;
+  // position from the left
+  x: number;
+  // position from the top
+  y: number;
+  // width of sprite section
+  width: number;
+  // height
+  height: number;
+}
+```
