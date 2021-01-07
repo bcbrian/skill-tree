@@ -2,6 +2,14 @@
 
 ##### It's over 9000
 
+## Process
+
+1. Define data sctructures
+1. Use Create React App temple with Typescript and Sass compatibility
+1. Write UAC test based on document
+1. Fleshout initial requirements
+1. Go Big! -- If I have time I will add some more featrures.
+
 ## Data structures
 
 > Hopefully this can someday be stored in a db. For now it will live on the front end.

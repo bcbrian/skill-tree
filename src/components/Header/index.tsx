@@ -7,8 +7,10 @@ interface HeaderProps extends React.HTMLAttributes<HTMLHeadingElement> {
 
 export default function Header({ children, ...props }: HeaderProps) {
   return (
-    <div className="header__container">
-      <h1 className="header__text">{children}</h1>
+    <div className="header">
+      <div className="header__background">
+        <h1 className="header__text">{children}</h1>
+      </div>
     </div>
   );
 }

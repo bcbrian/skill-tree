@@ -6,7 +6,9 @@ import Header from "./components/Header";
 function App() {
   return (
     <div className="App">
-      <Header>Hi every one</Header>
+      <Header>
+        TitanStar Legends - Rune Mastery Loadout Talent Calculator 9000
+      </Header>
     </div>
   );
 }
