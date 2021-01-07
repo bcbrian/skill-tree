@@ -35,7 +35,6 @@ test('The user may only use up to 6 points.', () => {
 });
 
 test('Each item only accounts for one point.', () => {
-\
   // same as a differnt test just checking a different outcome
 
   // given all skill points are not used
