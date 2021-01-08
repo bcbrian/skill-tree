@@ -2,7 +2,7 @@
  * This file a place holder for all the api data
  */
 
-interface Attribute {
+export interface Attribute {
   // name of the attribute
   name: string;
   // sort order for view... alphanewmeric? then not needed
@@ -34,7 +34,7 @@ export const Attributes: Attribute[] = [
     value: 0,
   },
 ];
-interface Skill {
+export interface Skill {
   // id of the skill
   id: string; //unique
   // name of the skill
@@ -232,7 +232,7 @@ export const Skills: Skill[] = [
   },
 ];
 
-interface Classification {
+export interface Classification {
   // name of the classification
   name: string;
   // sort order for view... alphanewmeric? then not needed
@@ -322,7 +322,7 @@ export const Classifications: Classification[] = [
   },
 ];
 
-interface User {
+export interface User {
   // name of the user
   name: string; // only matter with auth?
   // skills
@@ -353,7 +353,7 @@ export const Users: User[] = [
   },
 ];
 
-interface Sprite {
+export interface Sprite {
   // file location
   file: string;
   // position from the left
