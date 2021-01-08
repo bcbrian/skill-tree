@@ -9,7 +9,11 @@ test("Left click to add points.", () => {
   render(<App />);
   // select a unslected skill
   const leftClick = { button: 0 };
-  fireEvent.click(screen.queryByAltText(/skill/i), leftClick);
+  const skill = screen.queryByAltText(/skill/i);
+  if (skill == null) {
+    throw new Error("FAILED");
+  }
+  fireEvent.click(skill, leftClick);
   // update something and check that it is updated...
   expect(false).toBeTruthy();
 });
@@ -28,8 +32,8 @@ test("The user may only use up to 6 points.", () => {
   // given all skill points are used
   render(<App />);
   // select a unslected skill
-  const rightClick = { button: 0 };
-  fireEvent.click(screen.queryByAltText(/skill/i), rightClick);
+  const leftClick = { button: 0 };
+  fireEvent.click(screen.queryByAltText(/skill/i), leftClick);
   // update something and check that it is updated...
   expect(false).toBeTruthy();
 });

@@ -15,7 +15,7 @@
 > Hopefully this can someday be stored in a db. For now it will live on the front end.
 
 ```ts
-type Skill {
+interface Skill {
   // id of the skill
   id: string; //unique
   // name of the skill
@@ -34,7 +34,7 @@ type Skill {
   deactiveSprite: Sprite;
 }
 
-type Classification {
+interface Classification {
   // name of the classification
   name: string;
   // sort order for view... alphanewmeric? then not needed
@@ -43,7 +43,7 @@ type Classification {
   baseAttributes: Attribute[];
 }
 
-type Attribute {
+interface Attribute {
   // name of the attribute
   name: string;
   // sort order for view... alphanewmeric? then not needed
@@ -52,7 +52,7 @@ type Attribute {
   value: number;
 }
 
-type User {
+interface User {
   // name of the user
   name: string; // only matter with auth?
   // skills
@@ -65,7 +65,7 @@ type User {
   classification: Classification;
 }
 
-type Sprite {
+interface Sprite {
   // file location
   file: string;
   // position from the left
