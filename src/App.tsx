@@ -1,15 +1,22 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.scss";
-import { Header } from "./components/Header";
+import { AppContainer } from "./state";
+import { SkillTreeView } from "./views/SkillTreeView";
 
-function App() {
+interface AppProps {
+  api: {
+    get: {
+      user: Function;
+      skills: Function;
+    };
+  };
+}
+
+function App(props: AppProps) {
   return (
-    <div className="App">
-      <Header>
-        TitanStar Legends - Rune Mastery Loadout Talent Calculator 9000
-      </Header>
-    </div>
+    <AppContainer>
+      <SkillTreeView {...props} />
+    </AppContainer>
   );
 }
 

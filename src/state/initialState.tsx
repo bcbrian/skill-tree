@@ -1,6 +1,6 @@
 import { Skill, Skills, User, Users } from "../api";
 
-interface AppState {
+export interface AppState {
   state: {
     skills: Skill[] | null; // null means not requested yet
     user: User | null; // null is not logged in...
