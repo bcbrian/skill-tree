@@ -1,11 +1,9 @@
 import React from "react";
 import "./styles.scss";
 
-interface HeaderProps extends React.HTMLAttributes<HTMLHeadingElement> {
-  fontFamily: string;
-}
-
-const Header: React.FC<HeaderProps> = function ({ children, ...props }) {
+export const Header: React.FC<
+  React.HTMLAttributes<HTMLHeadingElement>
+> = function ({ children, ...props }) {
   return (
     <div className="header">
       <div className="header__background">
