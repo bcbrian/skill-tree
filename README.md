@@ -8,7 +8,15 @@
 1. Use Create React App temple with Typescript and Sass compatibility
 1. Write UAC test based on document
 1. Fleshout initial requirements
-1. Go Big! -- If I have time I will add some more featrures.
+   1. component, styles, theme arcitecture
+   2. some fake api data
+   3. get the concept working
+      1. update tests
+      2. setup app state
+      3. tweak data
+      4. build ux pieces
+   4. make it look good
+2. Go Big! -- If I have time I will add some more featrures.
 
 ## Data structures
 
