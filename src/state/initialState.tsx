@@ -1,10 +1,12 @@
 import { Skill, Skills, User, Users } from "../api";
 
+export interface AppData {
+  skills: Skill[] | null; // null means not requested yet
+  user: User | null; // null is not logged in...
+}
+
 export interface AppState {
-  state: {
-    skills: Skill[] | null; // null means not requested yet
-    user: User | null; // null is not logged in...
-  };
+  state: AppData;
   dispatch: Function;
 }
 

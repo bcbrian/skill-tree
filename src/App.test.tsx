@@ -1,35 +1,75 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  act,
+} from "@testing-library/react";
 import App from "./App";
 import * as get from "./api/get";
+import { Users } from "./api";
 // write some basic test to know that the criteria is met
 
-test("Left click to add points.", () => {
+test("Left click to add points.", async () => {
   // given all skill points are not used
+
   render(<App api={{ get }} />);
+
   // select a unslected skill
   const leftClick = { button: 0 };
-  const skill = screen.queryByAltText(/skill-0/i);
-  if (skill == null) {
+  let skillNotSelected = screen.queryByAltText(/skill-0--not-selected/i);
+  let skillSelected = screen.queryByAltText(/skill-0--selected/i);
+
+  expect(skillNotSelected).toBeDefined();
+  expect(skillSelected).toBeNull();
+
+  if (skillNotSelected === null) {
     throw new Error("FAILED");
   }
-  fireEvent.click(skill, leftClick);
+
+  fireEvent.click(skillNotSelected, leftClick);
+
+  skillNotSelected = screen.queryByAltText(/skill-0--not-selected/i);
+  skillSelected = screen.queryByAltText(/skill-0--selected/i);
   // update something and check that it is updated...
-  expect(false).toBeTruthy();
+  expect(skillNotSelected).toBeNull();
+  expect(skillSelected).toBeDefined();
 });
 
 test("Right click to remove points.", () => {
-  // given all skill points are used not used
-  render(<App api={{ get }} />);
-  // unselect a selected skill
+  // given all skill points are not used
+
+  render(
+    <App
+      api={{
+        get: {
+          ...get,
+          user: () => Users[1],
+        },
+      }}
+    />
+  );
+
+  // select a unslected skill
   const rightClick = { button: 2 };
-  const skill = screen.queryByAltText(/skill/i);
-  if (skill == null) {
+  let skillNotSelected = screen.queryByAltText(/skill-0--not-selected/i);
+  let skillSelected = screen.queryByAltText(/skill-0--selected/i);
+
+  expect(skillNotSelected).toBeNull();
+  expect(skillSelected).toBeDefined();
+
+  if (skillSelected == null) {
     throw new Error("FAILED");
   }
-  fireEvent.click(skill, rightClick);
+
+  fireEvent.contextMenu(skillSelected, rightClick);
+
+  skillNotSelected = screen.queryByAltText(/skill-0--not-selected/i);
+  skillSelected = screen.queryByAltText(/skill-0--selected/i);
   // update something and check that it is updated...
-  expect(false).toBeTruthy();
+  expect(skillNotSelected).toBeDefined();
+  expect(skillSelected).toBeNull();
 });
 
 test("The user may only use up to 6 points.", () => {
