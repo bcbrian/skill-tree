@@ -9,7 +9,7 @@ test("Left click to add points.", () => {
   render(<App api={{ get }} />);
   // select a unslected skill
   const leftClick = { button: 0 };
-  const skill = screen.queryByAltText(/skill/i);
+  const skill = screen.queryByAltText(/skill-0/i);
   if (skill == null) {
     throw new Error("FAILED");
   }
@@ -23,7 +23,11 @@ test("Right click to remove points.", () => {
   render(<App api={{ get }} />);
   // unselect a selected skill
   const rightClick = { button: 2 };
-  fireEvent.click(screen.queryByAltText(/skill/i), rightClick);
+  const skill = screen.queryByAltText(/skill/i);
+  if (skill == null) {
+    throw new Error("FAILED");
+  }
+  fireEvent.click(skill, rightClick);
   // update something and check that it is updated...
   expect(false).toBeTruthy();
 });
@@ -33,7 +37,11 @@ test("The user may only use up to 6 points.", () => {
   render(<App api={{ get }} />);
   // select a unslected skill
   const leftClick = { button: 0 };
-  fireEvent.click(screen.queryByAltText(/skill/i), leftClick);
+  const skill = screen.queryByAltText(/skill/i);
+  if (skill == null) {
+    throw new Error("FAILED");
+  }
+  fireEvent.click(skill, leftClick);
   // update something and check that it is updated...
   expect(false).toBeTruthy();
 });
@@ -45,7 +53,11 @@ test("Each item only accounts for one point.", () => {
   render(<App api={{ get }} />);
   // select a unslected skill
   const leftClick = { button: 0 };
-  fireEvent.click(screen.queryByAltText(/skill/i), leftClick);
+  const skill = screen.queryByAltText(/skill/i);
+  if (skill == null) {
+    throw new Error("FAILED");
+  }
+  fireEvent.click(skill, leftClick);
   // update something and check that it is updated...
   expect(false).toBeTruthy();
 });
@@ -62,7 +74,11 @@ test("The user must select the items in order. Select the next one.", () => {
   render(<App api={{ get }} />);
   // select a unslected skill
   const leftClick = { button: 0 };
-  fireEvent.click(screen.queryByAltText(/skill/i), leftClick);
+  const skill = screen.queryByAltText(/skill/i);
+  if (skill == null) {
+    throw new Error("FAILED");
+  }
+  fireEvent.click(skill, leftClick);
   // update something and check that it is updated...
   expect(false).toBeTruthy();
 });
@@ -72,7 +88,11 @@ test("The user must select the items in order. Try to skip one.", () => {
   render(<App api={{ get }} />);
   // select a unslected skill
   const leftClick = { button: 0 };
-  fireEvent.click(screen.queryByAltText(/skill/i), leftClick);
+  const skill = screen.queryByAltText(/skill/i);
+  if (skill == null) {
+    throw new Error("FAILED");
+  }
+  fireEvent.click(skill, leftClick);
   // update something and check that it is updated...
   expect(false).toBeTruthy();
 });
