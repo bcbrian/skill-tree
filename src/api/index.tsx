@@ -11,7 +11,12 @@ export interface Attribute {
   value: number;
 }
 
-// Base Attributes
+/**
+ * Attrubutes
+ * These are the base set of attributes
+ * hoping to use them got my little pony
+ * variant
+ */
 export const Attributes: Attribute[] = [
   {
     name: "stanima",
@@ -53,6 +58,13 @@ export interface Skill {
   deactiveSprite: Sprite;
 }
 
+/**
+ * Skills
+ *
+ * @description these are the skills
+ * that the app is using hopefulle we
+ * can move these to a db some day
+ */
 export const Skills: Skill[] = [
   {
     id: "0",
@@ -241,6 +253,13 @@ export interface Classification {
   baseAttributes: Attribute[];
 }
 
+/**
+ * Classifications
+ *
+ * @description These are classifications
+ * that I hope to use eventually for
+ * My little pony variant
+ */
 export const Classifications: Classification[] = [
   {
     name: "Earth Pony",
@@ -335,6 +354,12 @@ export interface User {
   // classification: Classification;
 }
 
+/**
+ * Users
+ *
+ * @description these are for testing purposes
+ * the first user is for the mvp of the app
+ */
 export const Users: User[] = [
   {
     name: "Jim",

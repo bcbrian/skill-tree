@@ -11,6 +11,14 @@ interface AppProps {
   deactiveFile: string;
 }
 
+/**
+ * @name Skill
+ * @param id id of the skill
+ * @param selected is the skill on the user
+ * @param activeFile active sprite
+ * @param deactiveFile deactive sprite
+ */
+
 export const Skill = function ({
   id,
   selected,
@@ -19,6 +27,14 @@ export const Skill = function ({
 }: AppProps) {
   const { dispatch } = useContext(AppContext);
 
+  /**
+   * @name handleClick
+   * @param event event.button to determine th click
+   *
+   * @description handle the right and left click
+   * done by onClick and onContextMenu. right click removes
+   * the skill left click adds the skill
+   */
   function handleClick(event: React.MouseEvent<HTMLDivElement>): void {
     if (!selected && event.button === 0) {
       dispatch({
@@ -28,7 +44,7 @@ export const Skill = function ({
         },
       });
     }
-    if (event.button === 2) {
+    if (selected && event.button === 2) {
       dispatch({
         type: ACTIONS.REMOVE_SKILL,
         payload: {

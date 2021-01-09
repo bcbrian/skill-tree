@@ -14,8 +14,21 @@ interface AppProps {
   };
 }
 
+/**
+ * @name SkillTreeView
+ *
+ * @description the view for the main view
+ * it makes the api calls the get the data
+ * and sets up the app state
+ */
 export function SkillTreeView({ api }: AppProps) {
   const { state, dispatch } = useContext(AppContext);
+
+  /**
+   * @name getData
+   * @description make api calls and send
+   * data to the app state
+   */
   useEffect(function getData() {
     dispatch({
       type: ACTIONS.LOAD_USER,
@@ -27,6 +40,7 @@ export function SkillTreeView({ api }: AppProps) {
     });
   }, []);
 
+  // if we dont have a user dont render yet.
   return state.user == null ? null : (
     <div className="App">
       <Header>
