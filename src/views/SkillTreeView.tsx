@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 // import "./App.scss";
 import { Header } from "../components/Header";
 import { Skills } from "../components/Skills";
+import { SkillPoints } from "../components/SkillPoints";
 import { AppContext } from "../state";
 import * as ACTIONS from "../state/actions";
 
@@ -47,6 +48,7 @@ export function SkillTreeView({ api }: AppProps) {
         TitanStar Legends - Rune Mastery Loadout Talent Calculator 9000
       </Header>
       <Skills />
+      <SkillPoints />
     </div>
   );
 }

@@ -21,8 +21,8 @@ test("Left click to add points.", async () => {
   let skillNotSelected = screen.queryByAltText(/skill-0--not-selected/i);
   let skillSelected = screen.queryByAltText(/skill-0--selected/i);
 
-  expect(skillNotSelected).toBeDefined();
-  expect(skillSelected).toBeNull();
+  expect(skillNotSelected).toBeInTheDocument();
+  expect(skillSelected).not.toBeInTheDocument();
 
   if (skillNotSelected === null) {
     throw new Error("FAILED");
@@ -33,8 +33,8 @@ test("Left click to add points.", async () => {
   skillNotSelected = screen.queryByAltText(/skill-0--not-selected/i);
   skillSelected = screen.queryByAltText(/skill-0--selected/i);
   // update something and check that it is updated...
-  expect(skillNotSelected).toBeNull();
-  expect(skillSelected).toBeDefined();
+  expect(skillNotSelected).not.toBeInTheDocument();
+  expect(skillSelected).toBeInTheDocument();
 });
 
 test("Right click to remove points.", () => {
@@ -56,8 +56,8 @@ test("Right click to remove points.", () => {
   let skillNotSelected = screen.queryByAltText(/skill-0--not-selected/i);
   let skillSelected = screen.queryByAltText(/skill-0--selected/i);
 
-  expect(skillNotSelected).toBeNull();
-  expect(skillSelected).toBeDefined();
+  expect(skillNotSelected).not.toBeInTheDocument();
+  expect(skillSelected).toBeInTheDocument();
 
   if (skillSelected == null) {
     throw new Error("FAILED");
@@ -68,11 +68,11 @@ test("Right click to remove points.", () => {
   skillNotSelected = screen.queryByAltText(/skill-0--not-selected/i);
   skillSelected = screen.queryByAltText(/skill-0--selected/i);
   // update something and check that it is updated...
-  expect(skillNotSelected).toBeDefined();
-  expect(skillSelected).toBeNull();
+  expect(skillNotSelected).toBeInTheDocument();
+  expect(skillSelected).not.toBeInTheDocument();
 });
 
-test.only("The user may only use up to 6 points.", () => {
+test("The user may only use up to 6 points.", () => {
   // given all skill points are not used
 
   render(
@@ -91,8 +91,8 @@ test.only("The user may only use up to 6 points.", () => {
   let skillNotSelected = screen.queryByAltText(/skill-6--not-selected/i);
   let skillSelected = screen.queryByAltText(/skill-6--selected/i);
 
-  expect(skillNotSelected).toBeDefined();
-  expect(skillSelected).toBeNull();
+  expect(skillNotSelected).toBeInTheDocument();
+  expect(skillSelected).not.toBeInTheDocument();
 
   if (skillNotSelected === null) {
     throw new Error("FAILED");
@@ -103,31 +103,42 @@ test.only("The user may only use up to 6 points.", () => {
   skillNotSelected = screen.queryByAltText(/skill-6--not-selected/i);
   skillSelected = screen.queryByAltText(/skill-6--selected/i);
   // update something and check that it is updated...
-  expect(skillNotSelected).toBeDefined();
-  expect(skillSelected).toBeNull();
-});
-
-test("Each item only accounts for one point.", () => {
-  // same as a differnt test just checking a different outcome
-
-  // given all skill points are not used
-  render(<App api={{ get }} />);
-  // select a unslected skill
-  const leftClick = { button: 0 };
-  const skill = screen.queryByAltText(/skill/i);
-  if (skill == null) {
-    throw new Error("FAILED");
-  }
-  fireEvent.click(skill, leftClick);
-  // update something and check that it is updated...
-  expect(false).toBeTruthy();
+  expect(skillNotSelected).toBeInTheDocument();
+  expect(skillSelected).not.toBeInTheDocument();
 });
 
 test("Displays current point total", () => {
   render(<App api={{ get }} />);
-  const totalPoints = screen.getByText(/learn react/i);
+  const totalPoints = screen.queryByText(/0\/6/i);
   // expect(linkElement).toBeInTheDocument();
-  expect(false).toBeTruthy();
+  expect(totalPoints).toBeInTheDocument();
+});
+
+test("Each item only accounts for one point.", () => {
+  // given all skill points are not used
+
+  render(<App api={{ get }} />);
+
+  // select a unslected skill to click
+  const leftClick = { button: 0 };
+  let skillNotSelected = screen.queryByAltText(/skill-0--not-selected/i);
+
+  // test there are not points yet
+  let noPoints = screen.queryByText(/0\/6/i);
+  let onePoint = screen.queryByText(/1\/6/i);
+  expect(noPoints).toBeInTheDocument();
+  expect(onePoint).not.toBeInTheDocument();
+
+  if (skillNotSelected === null) {
+    throw new Error("FAILED");
+  }
+  fireEvent.click(skillNotSelected, leftClick);
+
+  // test there is one point now
+  noPoints = screen.queryByText(/0\/6/i);
+  onePoint = screen.queryByText(/1\/6/i);
+  expect(noPoints).not.toBeInTheDocument();
+  expect(onePoint).toBeInTheDocument();
 });
 
 test("The user must select the items in order. Select the next one.", () => {
@@ -155,5 +166,13 @@ test("The user must select the items in order. Try to skip one.", () => {
   }
   fireEvent.click(skill, leftClick);
   // update something and check that it is updated...
+  expect(false).toBeTruthy();
+});
+
+// This seems like a UAC that is missing
+test("removing a skill removes skills that it is a req for", () => {
+  render(<App api={{ get }} />);
+  const totalPoints = screen.queryByText(/learn react/i);
+  // expect(linkElement).toBeInTheDocument();
   expect(false).toBeTruthy();
 });
