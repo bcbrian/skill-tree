@@ -72,18 +72,39 @@ test("Right click to remove points.", () => {
   expect(skillSelected).toBeNull();
 });
 
-test("The user may only use up to 6 points.", () => {
-  // given all skill points are used
-  render(<App api={{ get }} />);
+test.only("The user may only use up to 6 points.", () => {
+  // given all skill points are not used
+
+  render(
+    <App
+      api={{
+        get: {
+          ...get,
+          user: () => Users[2],
+        },
+      }}
+    />
+  );
+
   // select a unslected skill
   const leftClick = { button: 0 };
-  const skill = screen.queryByAltText(/skill/i);
-  if (skill == null) {
+  let skillNotSelected = screen.queryByAltText(/skill-6--not-selected/i);
+  let skillSelected = screen.queryByAltText(/skill-6--selected/i);
+
+  expect(skillNotSelected).toBeDefined();
+  expect(skillSelected).toBeNull();
+
+  if (skillNotSelected === null) {
     throw new Error("FAILED");
   }
-  fireEvent.click(skill, leftClick);
+
+  fireEvent.click(skillNotSelected, leftClick);
+
+  skillNotSelected = screen.queryByAltText(/skill-6--not-selected/i);
+  skillSelected = screen.queryByAltText(/skill-6--selected/i);
   // update something and check that it is updated...
-  expect(false).toBeTruthy();
+  expect(skillNotSelected).toBeDefined();
+  expect(skillSelected).toBeNull();
 });
 
 test("Each item only accounts for one point.", () => {

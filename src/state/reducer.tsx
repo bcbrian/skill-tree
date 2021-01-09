@@ -1,4 +1,4 @@
-import { skills } from "../api/get";
+import { skills, user } from "../api/get";
 import * as ACTIONS from "./actions";
 import { AppData } from "./initialState";
 
@@ -24,13 +24,18 @@ export function reducer(state: AppData, { type, payload }: ActionInfo) {
     /**
      * @name ADD_SKILL
      * @description takes the id of skill to
-     * add. if it is not there add it. if it is
+     * add. if there are skill points and
+     * if it is not there add it. if it is
      * there dont add it.
      *
      * TODO: need to check skill count before adding
      * TODO: need to validate that all skills can be there
      */
     case ACTIONS.ADD_SKILL: {
+      // check if we can add a skill
+      if (state?.user?.skills.length! >= state?.user?.skillPoints!) {
+        return { ...state };
+      }
       const { id } = payload;
       const skills = state?.user?.skills.includes(id)
         ? state?.user?.skills
