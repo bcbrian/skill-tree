@@ -1,4 +1,5 @@
 import { skills, user } from "../api/get";
+import { validateSkills } from "../utils";
 import * as ACTIONS from "./actions";
 import { AppData } from "./initialState";
 
@@ -28,7 +29,6 @@ export function reducer(state: AppData, { type, payload }: ActionInfo) {
      * if it is not there add it. if it is
      * there dont add it.
      *
-     * TODO: need to check skill count before adding
      * TODO: need to validate that all skills can be there
      */
     case ACTIONS.ADD_SKILL: {
@@ -37,9 +37,11 @@ export function reducer(state: AppData, { type, payload }: ActionInfo) {
         return { ...state };
       }
       const { id } = payload;
-      const skills = state?.user?.skills.includes(id)
+
+      const newSkills = state?.user?.skills.includes(id)
         ? state?.user?.skills
         : [...(state?.user?.skills || []), id];
+      const skills = validateSkills(state.skills || [], newSkills);
       return {
         ...state,
         user: {
@@ -57,11 +59,17 @@ export function reducer(state: AppData, { type, payload }: ActionInfo) {
      */
     case ACTIONS.REMOVE_SKILL: {
       const { id } = payload;
+
+      const newSkills: string[] | undefined = state?.user?.skills.filter(
+        (skill) => skill !== id
+      );
+
+      const skills = validateSkills(state.skills || [], newSkills || []);
       return {
         ...state,
         user: {
           ...state.user,
-          skills: state?.user?.skills.filter((skill) => skill !== id),
+          skills,
         },
       };
     }

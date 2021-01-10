@@ -5,41 +5,53 @@ import {
   fireEvent,
   waitFor,
   act,
+  Screen,
 } from "@testing-library/react";
 import App from "./App";
 import * as get from "./api/get";
 import { Users } from "./api";
 // write some basic test to know that the criteria is met
 
-test("Left click to add points.", async () => {
-  // given all skill points are not used
+/**
+ * @name getNotSelectedSkill
+ * @param {number} skillId
+ * @param {Screen} screen
+ */
+function getNotSelectedSkill(skill: number, screen: Screen) {
+  const regex = new RegExp(`skill-${skill}--not-selected`, "i");
+  return screen.queryByAltText(regex);
+}
 
+/**
+ * @name getSelectedSkill
+ * @param {number} skillId
+ * @param {Screen} screen
+ */
+function getSelectedSkill(skill: number, screen: Screen) {
+  const regex = new RegExp(`skill-${skill}--selected`, "i");
+  return screen.queryByAltText(regex);
+}
+
+const rightClick = { button: 2 };
+const leftClick = { button: 0 };
+
+test("Left click to add points.", async () => {
   render(<App api={{ get }} />);
 
-  // select a unslected skill
-  const leftClick = { button: 0 };
-  let skillNotSelected = screen.queryByAltText(/skill-0--not-selected/i);
-  let skillSelected = screen.queryByAltText(/skill-0--selected/i);
+  const skillNotSelectedZero = getNotSelectedSkill(0, screen);
+  expect(skillNotSelectedZero).toBeInTheDocument();
 
-  expect(skillNotSelected).toBeInTheDocument();
-  expect(skillSelected).not.toBeInTheDocument();
-
-  if (skillNotSelected === null) {
+  if (skillNotSelectedZero === null) {
     throw new Error("FAILED");
   }
 
-  fireEvent.click(skillNotSelected, leftClick);
+  fireEvent.click(skillNotSelectedZero, leftClick);
 
-  skillNotSelected = screen.queryByAltText(/skill-0--not-selected/i);
-  skillSelected = screen.queryByAltText(/skill-0--selected/i);
-  // update something and check that it is updated...
-  expect(skillNotSelected).not.toBeInTheDocument();
-  expect(skillSelected).toBeInTheDocument();
+  const skillSelectedZero = getSelectedSkill(0, screen);
+  expect(skillSelectedZero).toBeInTheDocument();
 });
 
 test("Right click to remove points.", () => {
-  // given all skill points are not used
-
   render(
     <App
       api={{
@@ -51,30 +63,20 @@ test("Right click to remove points.", () => {
     />
   );
 
-  // select a unslected skill
-  const rightClick = { button: 2 };
-  let skillNotSelected = screen.queryByAltText(/skill-0--not-selected/i);
-  let skillSelected = screen.queryByAltText(/skill-0--selected/i);
+  let skillSelectedZero = getSelectedSkill(0, screen);
+  expect(skillSelectedZero).toBeInTheDocument();
 
-  expect(skillNotSelected).not.toBeInTheDocument();
-  expect(skillSelected).toBeInTheDocument();
-
-  if (skillSelected == null) {
+  if (skillSelectedZero == null) {
     throw new Error("FAILED");
   }
 
-  fireEvent.contextMenu(skillSelected, rightClick);
+  fireEvent.contextMenu(skillSelectedZero, rightClick);
 
-  skillNotSelected = screen.queryByAltText(/skill-0--not-selected/i);
-  skillSelected = screen.queryByAltText(/skill-0--selected/i);
-  // update something and check that it is updated...
-  expect(skillNotSelected).toBeInTheDocument();
-  expect(skillSelected).not.toBeInTheDocument();
+  const skillNotSelectedZero = getNotSelectedSkill(0, screen);
+  expect(skillNotSelectedZero).toBeInTheDocument();
 });
 
 test("The user may only use up to 6 points.", () => {
-  // given all skill points are not used
-
   render(
     <App
       api={{
@@ -86,25 +88,17 @@ test("The user may only use up to 6 points.", () => {
     />
   );
 
-  // select a unslected skill
-  const leftClick = { button: 0 };
-  let skillNotSelected = screen.queryByAltText(/skill-6--not-selected/i);
-  let skillSelected = screen.queryByAltText(/skill-6--selected/i);
+  let skillNotSelectedSix = getNotSelectedSkill(6, screen);
+  expect(skillNotSelectedSix).toBeInTheDocument();
 
-  expect(skillNotSelected).toBeInTheDocument();
-  expect(skillSelected).not.toBeInTheDocument();
-
-  if (skillNotSelected === null) {
+  if (skillNotSelectedSix === null) {
     throw new Error("FAILED");
   }
 
-  fireEvent.click(skillNotSelected, leftClick);
+  fireEvent.click(skillNotSelectedSix, leftClick);
 
-  skillNotSelected = screen.queryByAltText(/skill-6--not-selected/i);
-  skillSelected = screen.queryByAltText(/skill-6--selected/i);
-  // update something and check that it is updated...
-  expect(skillNotSelected).toBeInTheDocument();
-  expect(skillSelected).not.toBeInTheDocument();
+  skillNotSelectedSix = getNotSelectedSkill(6, screen);
+  expect(skillNotSelectedSix).toBeInTheDocument();
 });
 
 test("Displays current point total", () => {
@@ -115,64 +109,114 @@ test("Displays current point total", () => {
 });
 
 test("Each item only accounts for one point.", () => {
-  // given all skill points are not used
-
   render(<App api={{ get }} />);
 
-  // select a unslected skill to click
-  const leftClick = { button: 0 };
-  let skillNotSelected = screen.queryByAltText(/skill-0--not-selected/i);
+  let skillNotSelectedZero = getNotSelectedSkill(0, screen);
 
   // test there are not points yet
-  let noPoints = screen.queryByText(/0\/6/i);
-  let onePoint = screen.queryByText(/1\/6/i);
+  const noPoints = screen.queryByText(/0\/6/i);
   expect(noPoints).toBeInTheDocument();
-  expect(onePoint).not.toBeInTheDocument();
 
-  if (skillNotSelected === null) {
+  if (skillNotSelectedZero === null) {
     throw new Error("FAILED");
   }
-  fireEvent.click(skillNotSelected, leftClick);
+  fireEvent.click(skillNotSelectedZero, leftClick);
 
   // test there is one point now
-  noPoints = screen.queryByText(/0\/6/i);
-  onePoint = screen.queryByText(/1\/6/i);
-  expect(noPoints).not.toBeInTheDocument();
+  const onePoint = screen.queryByText(/1\/6/i);
   expect(onePoint).toBeInTheDocument();
 });
 
 test("The user must select the items in order. Select the next one.", () => {
-  // given all skill points are not used
-  render(<App api={{ get }} />);
-  // select a unslected skill
-  const leftClick = { button: 0 };
-  const skill = screen.queryByAltText(/skill/i);
-  if (skill == null) {
+  render(
+    <App
+      api={{
+        get: {
+          ...get,
+          user: () => Users[1],
+        },
+      }}
+    />
+  );
+
+  const skillNotSelectedOne = getNotSelectedSkill(1, screen);
+  expect(skillNotSelectedOne).toBeInTheDocument();
+
+  if (skillNotSelectedOne === null) {
     throw new Error("FAILED");
   }
-  fireEvent.click(skill, leftClick);
-  // update something and check that it is updated...
-  expect(false).toBeTruthy();
+
+  fireEvent.click(skillNotSelectedOne, leftClick);
+
+  const skillSelectedOne = getSelectedSkill(1, screen);
+  expect(skillSelectedOne).toBeInTheDocument();
 });
 
 test("The user must select the items in order. Try to skip one.", () => {
-  // given all skill points are not used
-  render(<App api={{ get }} />);
-  // select a unslected skill
-  const leftClick = { button: 0 };
-  const skill = screen.queryByAltText(/skill/i);
-  if (skill == null) {
+  render(
+    <App
+      api={{
+        get: {
+          ...get,
+          user: () => Users[1],
+        },
+      }}
+    />
+  );
+
+  let skillNotSelectedTwo = getNotSelectedSkill(2, screen);
+  expect(skillNotSelectedTwo).toBeInTheDocument();
+
+  let skillSelectedZero = getSelectedSkill(0, screen);
+  expect(skillSelectedZero).toBeInTheDocument();
+
+  if (skillNotSelectedTwo === null) {
     throw new Error("FAILED");
   }
-  fireEvent.click(skill, leftClick);
-  // update something and check that it is updated...
-  expect(false).toBeTruthy();
+
+  fireEvent.click(skillNotSelectedTwo, leftClick);
+
+  skillNotSelectedTwo = getNotSelectedSkill(2, screen);
+  expect(skillNotSelectedTwo).toBeInTheDocument();
+
+  skillSelectedZero = getSelectedSkill(0, screen);
+  expect(skillSelectedZero).toBeInTheDocument();
 });
 
 // This seems like a UAC that is missing
 test("removing a skill removes skills that it is a req for", () => {
-  render(<App api={{ get }} />);
-  const totalPoints = screen.queryByText(/learn react/i);
-  // expect(linkElement).toBeInTheDocument();
-  expect(false).toBeTruthy();
+  render(
+    <App
+      api={{
+        get: {
+          ...get,
+          user: () => Users[2],
+        },
+      }}
+    />
+  );
+
+  let skillSelectedOne = getSelectedSkill(1, screen);
+  expect(skillSelectedOne).toBeInTheDocument();
+
+  const skillSelectedTwo = getSelectedSkill(2, screen);
+  expect(skillSelectedTwo).toBeInTheDocument();
+
+  const skillSelectedThree = getSelectedSkill(3, screen);
+  expect(skillSelectedThree).toBeInTheDocument();
+
+  if (skillSelectedTwo === null) {
+    throw new Error("FAILED");
+  }
+
+  fireEvent.contextMenu(skillSelectedTwo, rightClick);
+
+  const skillNotSelectedThree = getNotSelectedSkill(3, screen);
+  expect(skillNotSelectedThree).toBeInTheDocument();
+
+  const skillNotSelectedTwo = getNotSelectedSkill(2, screen);
+  expect(skillNotSelectedTwo).toBeInTheDocument();
+
+  skillSelectedOne = getSelectedSkill(1, screen);
+  expect(skillSelectedOne).toBeInTheDocument();
 });
