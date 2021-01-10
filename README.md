@@ -1,3 +1,5 @@
+![example workflow name](https://github.com/bcbrian/skill-tree/workflows/node.js.yml/badge.svg)
+
 # Rune Mastery Loadout Talent Calculator 9000
 
 ##### It's over 9000
