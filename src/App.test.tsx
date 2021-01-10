@@ -103,8 +103,7 @@ test("The user may only use up to 6 points.", () => {
 
 test("Displays current point total", () => {
   render(<App api={{ get }} />);
-  const totalPoints = screen.queryByText(/0\/6/i);
-  // expect(linkElement).toBeInTheDocument();
+  const totalPoints = screen.queryByText(/0\s\/\s6/i);
   expect(totalPoints).toBeInTheDocument();
 });
 
@@ -114,7 +113,7 @@ test("Each item only accounts for one point.", () => {
   let skillNotSelectedZero = getNotSelectedSkill(0, screen);
 
   // test there are not points yet
-  const noPoints = screen.queryByText(/0\/6/i);
+  const noPoints = screen.queryByText(/0\s\/\s6/i);
   expect(noPoints).toBeInTheDocument();
 
   if (skillNotSelectedZero === null) {
@@ -123,7 +122,7 @@ test("Each item only accounts for one point.", () => {
   fireEvent.click(skillNotSelectedZero, leftClick);
 
   // test there is one point now
-  const onePoint = screen.queryByText(/1\/6/i);
+  const onePoint = screen.queryByText(/1\s\/\s6/i);
   expect(onePoint).toBeInTheDocument();
 });
 

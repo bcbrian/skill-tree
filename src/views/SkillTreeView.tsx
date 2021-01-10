@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import "./SkillTreeView.scss";
 import { Header } from "../components/Header";
 import { Classifications } from "../components/Classifications";
 import { SkillPoints } from "../components/SkillPoints";
 import { AppContext } from "../state";
 import * as ACTIONS from "../state/actions";
+import "./SkillTreeView.scss";
 
 interface AppProps {
   api: {

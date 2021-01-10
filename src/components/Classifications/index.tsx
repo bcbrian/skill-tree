@@ -19,7 +19,7 @@ export const Classifications: React.FC = function ({ children, ...props }) {
       {classifications
         ?.sort((a, b) => a.sortOrder - b.sortOrder)
         .map(({ name }) => (
-          <div className="classification">
+          <div key={name} className="classification">
             <div className="classification__title">{name}</div>
             {skills
               ?.filter(({ classifications }) => classifications.includes(name))
