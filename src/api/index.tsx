@@ -71,21 +71,19 @@ export const Skills: Skill[] = [
     name: "laundry",
     description: "So good at doing laundry",
     prerequisites: [],
-    classifications: [],
+    classifications: ["homemaker"],
     effects: [],
     activeSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
       x: 0,
       y: 0,
-      width: 64,
-      height: 64,
+      width: 50,
+      height: 50,
     },
     deactiveSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
       x: 0,
-      y: 64,
-      width: 64,
-      height: 64,
+      y: 50,
+      width: 50,
+      height: 50,
     },
   },
   {
@@ -93,21 +91,19 @@ export const Skills: Skill[] = [
     name: "dishes",
     description: "So good at doing dishes",
     prerequisites: ["0"],
-    classifications: [],
+    classifications: ["homemaker"],
     effects: [],
     activeSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
-      x: 0,
+      x: 50,
       y: 0,
-      width: 64,
-      height: 64,
+      width: 50,
+      height: 50,
     },
     deactiveSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
-      x: 0,
-      y: 64,
-      width: 64,
-      height: 64,
+      x: 50,
+      y: 50,
+      width: 50,
+      height: 50,
     },
   },
   {
@@ -115,21 +111,19 @@ export const Skills: Skill[] = [
     name: "baking",
     description: "So good at doing baking",
     prerequisites: ["1"],
-    classifications: [],
+    classifications: ["homemaker"],
     effects: [],
     activeSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
-      x: 0,
+      x: 100,
       y: 0,
-      width: 64,
-      height: 64,
+      width: 50,
+      height: 50,
     },
     deactiveSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
-      x: 0,
-      y: 64,
-      width: 64,
-      height: 64,
+      x: 100,
+      y: 50,
+      width: 50,
+      height: 50,
     },
   },
   {
@@ -137,21 +131,19 @@ export const Skills: Skill[] = [
     name: "boss",
     description: "So good at being the boss",
     prerequisites: ["2"],
-    classifications: [],
+    classifications: ["homemaker"],
     effects: [],
     activeSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
-      x: 0,
+      x: 150,
       y: 0,
-      width: 64,
-      height: 64,
+      width: 50,
+      height: 50,
     },
     deactiveSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
-      x: 0,
-      y: 64,
-      width: 64,
-      height: 64,
+      x: 150,
+      y: 50,
+      width: 50,
+      height: 50,
     },
   },
   {
@@ -159,21 +151,19 @@ export const Skills: Skill[] = [
     name: "boating",
     description: "So good at boating",
     prerequisites: [],
-    classifications: [],
+    classifications: ["moneymaker"],
     effects: [],
     activeSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
-      x: 0,
+      x: 200,
       y: 0,
-      width: 64,
-      height: 64,
+      width: 50,
+      height: 50,
     },
     deactiveSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
-      x: 0,
-      y: 64,
-      width: 64,
-      height: 64,
+      x: 200,
+      y: 50,
+      width: 50,
+      height: 50,
     },
   },
   {
@@ -181,21 +171,19 @@ export const Skills: Skill[] = [
     name: "diving",
     description: "So good at diving",
     prerequisites: ["4"],
-    classifications: [],
+    classifications: ["moneymaker"],
     effects: [],
     activeSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
-      x: 0,
+      x: 250,
       y: 0,
-      width: 64,
-      height: 64,
+      width: 50,
+      height: 50,
     },
     deactiveSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
-      x: 0,
-      y: 64,
-      width: 64,
-      height: 64,
+      x: 250,
+      y: 50,
+      width: 50,
+      height: 50,
     },
   },
   {
@@ -203,21 +191,19 @@ export const Skills: Skill[] = [
     name: "meteorology",
     description: "So good at doing meteorology",
     prerequisites: ["5"],
-    classifications: [],
+    classifications: ["moneymaker"],
     effects: [],
     activeSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
-      x: 0,
+      x: 300,
       y: 0,
-      width: 64,
-      height: 64,
+      width: 50,
+      height: 50,
     },
     deactiveSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
-      x: 0,
-      y: 64,
-      width: 64,
-      height: 64,
+      x: 300,
+      y: 50,
+      width: 50,
+      height: 50,
     },
   },
   {
@@ -225,21 +211,19 @@ export const Skills: Skill[] = [
     name: "costumes",
     description: "So good at making costumes",
     prerequisites: ["6"],
-    classifications: [],
+    classifications: ["moneymaker"],
     effects: [],
     activeSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
-      x: 0,
+      x: 350,
       y: 0,
-      width: 64,
-      height: 64,
+      width: 50,
+      height: 50,
     },
     deactiveSprite: {
-      file: "assets/images/sprites/talent-icons-sprite.png",
-      x: 0,
-      y: 64,
-      width: 64,
-      height: 64,
+      x: 350,
+      y: 50,
+      width: 50,
+      height: 50,
     },
   },
 ];
@@ -257,12 +241,10 @@ export interface Classification {
  * Classifications
  *
  * @description These are classifications
- * that I hope to use eventually for
- * My little pony variant
  */
 export const Classifications: Classification[] = [
   {
-    name: "Earth Pony",
+    name: "homemaker",
     sortOrder: 0,
     baseAttributes: [
       {
@@ -288,49 +270,23 @@ export const Classifications: Classification[] = [
     ],
   },
   {
-    name: "Pegasus",
-    sortOrder: 0,
+    name: "moneymaker",
+    sortOrder: 1,
     baseAttributes: [
       {
         name: "stanima",
         sortOrder: 0,
-        value: 10,
+        value: 12,
       },
       {
         name: "body",
         sortOrder: 1,
-        value: 6,
+        value: 8,
       },
       {
         name: "mind",
         sortOrder: 2,
         value: 4,
-      },
-      {
-        name: "charm",
-        sortOrder: 3,
-        value: 6,
-      },
-    ],
-  },
-  {
-    name: "Unicorn",
-    sortOrder: 0,
-    baseAttributes: [
-      {
-        name: "stanima",
-        sortOrder: 0,
-        value: 10,
-      },
-      {
-        name: "body",
-        sortOrder: 1,
-        value: 4,
-      },
-      {
-        name: "mind",
-        sortOrder: 2,
-        value: 6,
       },
       {
         name: "charm",
@@ -379,8 +335,6 @@ export const Users: User[] = [
 ];
 
 export interface Sprite {
-  // file location
-  file: string;
   // position from the left
   x: number;
   // position from the top

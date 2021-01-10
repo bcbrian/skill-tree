@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../state";
-import * as ACTIONS from "../../state/actions";
 
 import "./styles.scss";
 
@@ -14,10 +13,10 @@ export const SkillPoints = function () {
 
   return (
     <div className="skill-points">
-      <div className="skill-points__title">Skill Points</div>
       <div className="skill-points__points">
-        {user?.skills.length}/{user?.skillPoints}
+        {user?.skills.length} / {user?.skillPoints}
       </div>
+      <div className="skill-points__title">Points Spent</div>
     </div>
   );
 };

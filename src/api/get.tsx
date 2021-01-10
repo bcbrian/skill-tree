@@ -1,4 +1,11 @@
-import { User, Users, Skill, Skills } from "./";
+import {
+  User,
+  Users,
+  Skill,
+  Skills,
+  Classification,
+  Classifications,
+} from "./";
 
 export function user(): User {
   return Users[0];
@@ -6,4 +13,8 @@ export function user(): User {
 
 export function skills(): Skill[] {
   return Skills;
+}
+
+export function classifications(): Classification[] {
+  return Classifications;
 }

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
-// import "./App.scss";
+import "./SkillTreeView.scss";
 import { Header } from "../components/Header";
-import { Skills } from "../components/Skills";
+import { Classifications } from "../components/Classifications";
 import { SkillPoints } from "../components/SkillPoints";
 import { AppContext } from "../state";
 import * as ACTIONS from "../state/actions";
@@ -11,6 +11,7 @@ interface AppProps {
     get: {
       user: Function;
       skills: Function;
+      classifications: Function;
     };
   };
 }
@@ -39,6 +40,10 @@ export function SkillTreeView({ api }: AppProps) {
       type: ACTIONS.LOAD_SKILLS,
       payload: api.get.skills(),
     });
+    dispatch({
+      type: ACTIONS.LOAD_CLASSIFICATIONS,
+      payload: api.get.classifications(),
+    });
   }, []);
 
   // if we dont have a user dont render yet.
@@ -47,8 +52,10 @@ export function SkillTreeView({ api }: AppProps) {
       <Header>
         TitanStar Legends - Rune Mastery Loadout Talent Calculator 9000
       </Header>
-      <Skills />
-      <SkillPoints />
+      <div className="App__Container">
+        <Classifications />
+        <SkillPoints />
+      </div>
     </div>
   );
 }

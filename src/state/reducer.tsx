@@ -1,7 +1,6 @@
-import { skills, user } from "../api/get";
 import { validateSkills } from "../utils";
 import * as ACTIONS from "./actions";
-import { AppData } from "./initialState";
+import { AppState } from "./initialState";
 
 // TODO:: NO ANY PLEASE
 interface ActionInfo {
@@ -20,7 +19,7 @@ interface ActionInfo {
  * going to be more justfied as the app
  * matures
  */
-export function reducer(state: AppData, { type, payload }: ActionInfo) {
+export function reducer(state: AppState, { type, payload }: ActionInfo) {
   switch (type) {
     /**
      * @name ADD_SKILL
@@ -28,8 +27,6 @@ export function reducer(state: AppData, { type, payload }: ActionInfo) {
      * add. if there are skill points and
      * if it is not there add it. if it is
      * there dont add it.
-     *
-     * TODO: need to validate that all skills can be there
      */
     case ACTIONS.ADD_SKILL: {
       // check if we can add a skill
@@ -54,8 +51,6 @@ export function reducer(state: AppData, { type, payload }: ActionInfo) {
      * @name REMOVE_SKILL
      * @description takes the id of skill to
      * remove. if it is there dont remove it.
-     *
-     * TODO: need to validate that all skills can be there
      */
     case ACTIONS.REMOVE_SKILL: {
       const { id } = payload;
@@ -81,6 +76,15 @@ export function reducer(state: AppData, { type, payload }: ActionInfo) {
       return {
         ...state,
         skills: payload,
+      };
+    /**
+     * @name LOAD_CLASSIFICATIONS
+     * @description load classifications for the app to use.
+     */
+    case ACTIONS.LOAD_CLASSIFICATIONS:
+      return {
+        ...state,
+        classifications: payload,
       };
     /**
      * @name LOAD_USER
