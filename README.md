@@ -1,4 +1,4 @@
-![example workflow name](https://github.com/bcbrian/skill-tree/workflows/node.js.yml/badge.svg)
+![Tests](https://github.com/bcbrian/skill-tree/workflows/node.js.yml/badge.svg)
 
 # Rune Mastery Loadout Talent Calculator 9000
 
