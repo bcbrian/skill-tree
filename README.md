@@ -1,4 +1,4 @@
-![Tests](https://github.com/bcbrian/skill-tree/workflows/node.js/badge.svg)
+![Tests](https://github.com/bcbrian/skill-tree/workflows/Node.js%20CI/badge.svg)
 
 # Rune Mastery Loadout Talent Calculator 9000
 
