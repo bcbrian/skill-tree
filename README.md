@@ -1,4 +1,5 @@
 ![Tests](https://github.com/bcbrian/skill-tree/workflows/Tests/badge.svg)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/634698f6-1397-4562-88f5-de0aa2a2a692/deploy-status)](https://app.netlify.com/sites/skill-tree/deploys)
 
 # Rune Mastery Loadout Talent Calculator 9000
 
