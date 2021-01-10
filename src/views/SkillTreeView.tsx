@@ -31,20 +31,23 @@ export function SkillTreeView({ api }: AppProps) {
    * @description make api calls and send
    * data to the app state
    */
-  useEffect(function getData() {
-    dispatch({
-      type: ACTIONS.LOAD_USER,
-      payload: api.get.user(),
-    });
-    dispatch({
-      type: ACTIONS.LOAD_SKILLS,
-      payload: api.get.skills(),
-    });
-    dispatch({
-      type: ACTIONS.LOAD_CLASSIFICATIONS,
-      payload: api.get.classifications(),
-    });
-  }, []);
+  useEffect(
+    function getData() {
+      dispatch({
+        type: ACTIONS.LOAD_USER,
+        payload: api.get.user(),
+      });
+      dispatch({
+        type: ACTIONS.LOAD_SKILLS,
+        payload: api.get.skills(),
+      });
+      dispatch({
+        type: ACTIONS.LOAD_CLASSIFICATIONS,
+        payload: api.get.classifications(),
+      });
+    },
+    [api.get, dispatch]
+  );
 
   // if we dont have a user dont render yet.
   return state.user == null ? null : (

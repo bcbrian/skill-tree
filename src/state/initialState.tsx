@@ -1,11 +1,4 @@
-import {
-  Classification,
-  Classifications,
-  Skill,
-  Skills,
-  User,
-  Users,
-} from "../api";
+import { Classification, Classifications, Skill, Skills, User } from "../api";
 
 export interface AppState {
   classifications: Classification[] | null; // null means not requested yet
