@@ -18,7 +18,7 @@
    3. Get the concept working
       1. Update tests
       2. Setup app state
-      3. Tweak data
+      3. TDD
       4. Build ux pieces
    4. Make it look good
 2. Go Big! -- If I have time I will add some more featrures.
